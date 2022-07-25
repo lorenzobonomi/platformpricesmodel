@@ -4,10 +4,8 @@ from json import load
 import numpy as np
 import pandas as pd
 import streamlit as st
-from streamlit_ace import st_ace
 from matplotlib import pyplot as plt
 import seaborn as sns
-import sqlite3 as sql
 import altair as alt
 
 # Ad-hoc project modules
