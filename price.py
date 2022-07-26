@@ -8,6 +8,8 @@ def calculate_net_revenue(option_acquisition, drivers, riders, cac_driver, cac_r
     costs = []
     final_drivers = []
     final_riders = []
+    acquired_drivers_list = []
+    acquired_riders_list = []
     
     # Loop for the 12 months selected
     for z in range(0, len(test_profits_sm)):
@@ -26,22 +28,24 @@ def calculate_net_revenue(option_acquisition, drivers, riders, cac_driver, cac_r
             
             new_drivers -= math.floor(new_drivers * churn_rate_driver)
 
-            if option_acquisition == 'No':
-                acquired_drivers = 0
-            else:
+            if option_acquisition == 'Yes' and (drivers[i] - new_drivers) > 0:
                 acquired_drivers = drivers[i] - new_drivers
+            else:
+                acquired_drivers = 0
 
+            acquired_drivers_list.append(acquired_drivers)
             new_drivers += acquired_drivers
             total_cost_acquisition += acquired_drivers * cac_driver
 
 
             new_riders -= math.floor(new_riders * test_match_rate * churn_rate_rider_success + new_riders * (1 - test_match_rate) * churn_rate_rider_failed)
             
-            if option_acquisition == 'No':
-                acquired_riders = 0
-            else:    
+            if option_acquisition == 'Yes' and (riders[i] - new_riders) > 0:    
                 acquired_riders = riders[i] - new_riders
+            else:
+                acquired_riders = 0
 
+            acquired_riders_list.append(acquired_riders)
             new_riders += acquired_riders
             total_cost_acquisition += acquired_riders * cac_rider
 
@@ -58,7 +62,7 @@ def calculate_net_revenue(option_acquisition, drivers, riders, cac_driver, cac_r
         final_drivers.append(new_drivers)
         final_riders.append(new_riders)
     
-    return revenue, costs, final_drivers, final_riders
+    return revenue, costs, final_drivers, final_riders, acquired_drivers_list, acquired_riders_list
     
 
     

@@ -73,11 +73,11 @@ ax.set_xlabel('Prices')
 col5.pyplot(fig)
 
 # Calculation of net revenue and costs when option is selected
-net_revenue, costs, final_drivers, final_riders = pr.calculate_net_revenue(option_acquisition, drivers[0:n_months+1], riders[0:n_months+1], cac_driver, cac_rider, start_drivers, initial_riders_ratio, test_profits_sm, test_match_rates_sm, rides_month_rider, rides_month_driver, churn_rate_driver, churn_rate_rider_success, churn_rate_rider_failed)
+net_revenue, costs, final_drivers, final_riders, acquired_drivers, acquired_riders = pr.calculate_net_revenue(option_acquisition, drivers[0:n_months+1], riders[0:n_months+1], cac_driver, cac_rider, start_drivers, initial_riders_ratio, test_profits_sm, test_match_rates_sm, rides_month_rider, rides_month_driver, churn_rate_driver, churn_rate_rider_success, churn_rate_rider_failed)
 
 # Dataframe with results of simulation
-results_df = pd.DataFrame(list(zip(net_revenue, costs, final_drivers, final_riders, test_profits_sm, test_match_rates_sm)),
-            columns =['Net Revenue', 'Costs', 'Final Drivers', 'Final Riders', 'Profit for ride', 'Match rate'])
+results_df = pd.DataFrame(list(zip(net_revenue, costs, final_drivers, final_riders, test_profits_sm, test_match_rates_sm, acquired_drivers, acquired_riders)),
+            columns =['Net Revenue', 'Costs', 'Final Drivers', 'Final Riders', 'Profit for ride', 'Match rate', 'Acquired Drivers', 'Acquired Riders'])
 
 results_df['Margin'] = results_df['Net Revenue'] - results_df['Costs']
 
