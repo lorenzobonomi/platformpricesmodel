@@ -1,6 +1,6 @@
 import math
 
-
+# Function for simulating revenue and margin when selected based on parameters selected
 def calculate_net_revenue(option_acquisition, drivers, riders, cac_driver, cac_rider, start_drivers, initial_riders_ratio, test_profits_sm, test_match_rates_sm, rides_month_rider, rides_month_driver, churn_rate_driver, churn_rate_rider_success, churn_rate_rider_failed):
     
 
@@ -9,6 +9,7 @@ def calculate_net_revenue(option_acquisition, drivers, riders, cac_driver, cac_r
     final_drivers = []
     final_riders = []
     
+    # Loop for the 12 months selected
     for z in range(0, len(test_profits_sm)):
 
         start_riders = start_drivers * initial_riders_ratio 
@@ -51,7 +52,6 @@ def calculate_net_revenue(option_acquisition, drivers, riders, cac_driver, cac_r
 
             net_revenue_new_month = test_profits_sm[z] * new_riders * rides_month_rider * test_match_rates_sm[z]
             net_revenue += net_revenue_new_month
-            #print(i, new_drivers, check_rides, net_revenue_new_month, net_revenue)
     
         revenue.append(net_revenue)
         costs.append(total_cost_acquisition)
